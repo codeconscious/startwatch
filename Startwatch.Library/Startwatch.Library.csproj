@@ -5,13 +5,13 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <PackageId>Startwatch.2023.12.30.Test</PackageId>
+    <PackageId>CodeConscious.Startwatch</PackageId>
     <Version>0.0.1</Version>
     <Authors>CodeConscious</Authors>
     <Company>CodeConscious</Company>
-    <Description></Description>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
+    <Description>A simple Stopwatch wrapper.</Description>
+    <PackageProjectUrl>https://github.com/codeconscious/startwatch</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/codeconscious/startwatch</RepositoryUrl>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
