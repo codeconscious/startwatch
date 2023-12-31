@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 
     <PackageId>CodeConscious.Startwatch</PackageId>
-    <Version>0.0.1</Version>
+    <Version>0.0.3</Version>
     <Authors>CodeConscious</Authors>
     <Company>CodeConscious</Company>
     <Description>A simple Stopwatch wrapper.</Description>
