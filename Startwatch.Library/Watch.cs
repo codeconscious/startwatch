@@ -23,11 +23,17 @@ public sealed class Watch
     public string ElapsedFriendly =>
         TimeSpan.FromTicks(Stopwatch.Elapsed.Ticks).ElapsedFriendly();
 
+    /// <summary>
+    /// A constructor that automatically starts the enclosed `Stopwatch`.
+    /// </summary>
     public Watch()
     {
         Stopwatch.Start();
     }
 
+    /// <summary>
+    /// Stops time interval measurement, resets the elapsed time to zero, and starts measuring elapsed time.
+    /// </summary>
     public void Restart()
     {
         Stopwatch.Restart();
