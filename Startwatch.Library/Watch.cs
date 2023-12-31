@@ -6,7 +6,7 @@ namespace Startwatch.Library;
 /// <summary>
 /// A `Stopwatch` wrapper. Starts the enclosed `Stopwatch` upon instantiation.
 /// </summary>
-public sealed class Startwatch
+public sealed class Watch
 {
     private readonly Stopwatch Stopwatch = new();
 
@@ -23,7 +23,7 @@ public sealed class Startwatch
     public string ElapsedFriendly =>
         TimeSpan.FromTicks(Stopwatch.Elapsed.Ticks).ElapsedFriendly();
 
-    public Startwatch()
+    public Watch()
     {
         Stopwatch.Start();
     }
