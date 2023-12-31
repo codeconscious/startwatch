@@ -6,6 +6,24 @@ namespace Startwatch.Tests;
 public sealed class StartwatchTests
 {
     [Fact]
+    public void Nanoseconds_ThreeDigits_FormatsCorrectly()
+    {
+        TimeSpan timeSpan = TimeSpan.FromTicks(1); // 1 tick == 100 nanoseconds
+        string actual = timeSpan.ElapsedFriendly();
+        string expected = "100ns";
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void Nanoseconds_FiveDigits_FormatsCorrectly()
+    {
+        TimeSpan timeSpan = TimeSpan.FromTicks(100); // 1 tick == 100 nanoseconds
+        string actual = timeSpan.ElapsedFriendly();
+        string expected = "10,000ns";
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void Milliseconds_OneDigit_FormatsCorrectly()
     {
         TimeSpan timeSpan = TimeSpan.FromMilliseconds(1);
@@ -46,7 +64,7 @@ public sealed class StartwatchTests
     {
         TimeSpan timeSpan = TimeSpan.FromMilliseconds(999.9);
         string actual = timeSpan.ElapsedFriendly();
-        string expected = "1000ms";
+        string expected = "1,000ms";
         Assert.Equal(expected, actual);
     }
 

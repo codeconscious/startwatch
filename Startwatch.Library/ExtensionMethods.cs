@@ -11,7 +11,11 @@ public static class ExtensionMethods
     {
         if (timeSpan.TotalMilliseconds < 1000)
         {
-            return $"{timeSpan.TotalMilliseconds:###0}ms";
+            return timeSpan switch
+            {
+                { TotalMilliseconds: <1 } => $"{timeSpan.TotalNanoseconds:#,##0}ns",
+                _ => $"{timeSpan.TotalMilliseconds:#,##0}ms"
+            };
         }
 
         int days = timeSpan.Days;
@@ -30,7 +34,7 @@ public static class ExtensionMethods
         string minsText = (hours, mins) switch
         {
             (>0, >0) => $"{mins:00}m",
-            (_, >0) => $"{mins:0}m",
+            (_, >0)  => $"{mins:0}m",
             _ => string.Empty
         };
 
