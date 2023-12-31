@@ -14,7 +14,7 @@ public static class ExtensionMethods
             return timeSpan switch
             {
                 { TotalMilliseconds: <1 } => $"{timeSpan.TotalNanoseconds:#,##0}ns",
-                _ => $"{timeSpan.TotalMilliseconds:#,##0}ms"
+                _                         => $"{timeSpan.TotalMilliseconds:#,##0}ms"
             };
         }
 
