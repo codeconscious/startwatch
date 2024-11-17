@@ -8,7 +8,7 @@ namespace Startwatch.Library;
 /// </summary>
 public sealed class Watch
 {
-    private readonly Stopwatch Stopwatch = new();
+    private readonly Stopwatch _stopwatch = new();
 
     /// <summary>
     /// Returns a formatted version of the elapsed time since the timer was started.
@@ -21,21 +21,22 @@ public sealed class Watch
     ///   For reasons of which I'm unware, the latter returns unexpected values.
     /// </remarks>
     public string ElapsedFriendly =>
-        TimeSpan.FromTicks(Stopwatch.Elapsed.Ticks).ElapsedFriendly();
+        TimeSpan.FromTicks(_stopwatch.Elapsed.Ticks).ElapsedFriendly();
 
     /// <summary>
     /// A constructor that automatically starts the enclosed `Stopwatch`.
     /// </summary>
     public Watch()
     {
-        Stopwatch.Start();
+        _stopwatch.Start();
     }
 
     /// <summary>
-    /// Stops time interval measurement, resets the elapsed time to zero, and starts measuring elapsed time.
+    /// Stops time interval measurement, resets the elapsed time to zero,
+    /// and starts measuring elapsed time.
     /// </summary>
     public void Restart()
     {
-        Stopwatch.Restart();
+        _stopwatch.Restart();
     }
 }
