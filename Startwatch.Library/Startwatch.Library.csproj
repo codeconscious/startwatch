@@ -1,12 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
     <PackageId>CodeConscious.Startwatch</PackageId>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <Authors>CodeConscious</Authors>
     <Company>CodeConscious</Company>
     <Description>A simple Stopwatch wrapper.</Description>
@@ -15,9 +13,7 @@
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
-
   <ItemGroup>
     <None Include="docs\readme.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
-
 </Project>
