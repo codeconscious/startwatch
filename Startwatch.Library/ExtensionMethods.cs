@@ -40,9 +40,9 @@ public static class ExtensionMethods
 
         var secsText = (hours, mins, secs) switch
         {
-            (0, 0, >0)                 => timeSpan.ToString("s\\.ff") + "s",
-            (>0, _, >0) or (_, >0, >0) => timeSpan.ToString("ss") + "s",
-            (_, _, >0)                 => timeSpan.ToString("s") + "s",
+            (0, 0, >0)                 => $"{timeSpan:s\\.ff}s",
+            (>0, _, >0) or (_, >0, >0) => $"{timeSpan:ss}s",
+            (_, _, >0)                 => $"{timeSpan:s}s",
             _ => string.Empty
         };
 
