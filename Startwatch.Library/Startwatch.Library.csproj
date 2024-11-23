@@ -4,7 +4,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>CodeConscious.Startwatch</PackageId>
-    <Version>0.0.4</Version>
+    <Version>1.0.0</Version>
     <Authors>CodeConscious</Authors>
     <Company>CodeConscious</Company>
     <Description>A simple Stopwatch wrapper.</Description>
@@ -12,6 +12,7 @@
     <RepositoryUrl>https://github.com/codeconscious/startwatch</RepositoryUrl>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docs\readme.md" Pack="true" PackagePath="\"/>
