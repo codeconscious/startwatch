@@ -23,29 +23,29 @@ public static class ExtensionMethods
         int mins = timeSpan.Minutes;
         int secs = timeSpan.Seconds;
 
-        string prependText = secs == 0 ? "exactly " : string.Empty;
+        var prependText = secs == 0 ? "exactly " : string.Empty;
 
-        string hoursText = (days, hours) switch
+        var hoursText = (days, hours) switch
         {
             (>0, _) or (_, >0) => $"{hours + (days * 24):#,##0}h",
             _ => string.Empty
         };
 
-        string minsText = (hours, mins) switch
+        var minsText = (hours, mins) switch
         {
             (>0, >0) => $"{mins:00}m",
             (_, >0)  => $"{mins:0}m",
             _ => string.Empty
         };
 
-        string secsText = (hours, mins, secs) switch
+        var secsText = (hours, mins, secs) switch
         {
-            (0, 0, >0)                 => timeSpan.ToString("s\\.ff") + "s",
-            (>0, _, >0) or (_, >0, >0) => timeSpan.ToString("ss") + "s",
-            (_, _, >0)                 => timeSpan.ToString("s") + "s",
+            (0, 0, >0)                 => $"{timeSpan:s\\.ff}s",
+            (>0, _, >0) or (_, >0, >0) => $"{timeSpan:ss}s",
+            (_, _, >0)                 => $"{timeSpan:s}s",
             _ => string.Empty
         };
 
-        return prependText + hoursText + minsText + secsText;
+        return $"{prependText}{hoursText}{minsText}{secsText}";
     }
 }
