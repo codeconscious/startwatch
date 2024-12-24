@@ -1,12 +1,11 @@
 ﻿module Tests
 
 open System
-open Startwatch.Library.Extensions
 open Xunit
+open Startwatch.Library.Extensions
 
 [<Fact>]
 let ``nanosecond with three digits are formatted correctly`` () =
-    // Assert.True(true)
     let timeSpan = TimeSpan.FromTicks(1) // 1 tick == 100 nanoseconds
     let actual = timeSpan.ElapsedFriendly()
     let expected = "100ns"
