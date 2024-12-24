@@ -1,15 +1,12 @@
-﻿namespace Startwatch.Library.FSharp
+﻿namespace Startwatch.Library
 
 open System
 open System.Diagnostics
 
-module Startwatch =
-    type Watch() =
-        let startedAt = Stopwatch.GetTimestamp()
-
-        let elapsedFriendly (startedAt: int64) =
-            let timeSpan = Stopwatch.GetElapsedTime(startedAt)
-            match timeSpan with
+module Extensions =
+    type TimeSpan with
+        member this.ElapsedFriendly() =
+            match this with
             | t when t.TotalMilliseconds < 1 -> sprintf "%s" (t.TotalNanoseconds.ToString("#,##0ns"))
             | t when t.TotalMilliseconds < 1000 -> sprintf "%s" (t.TotalMilliseconds.ToString("#,##0ms"))
             | t ->
@@ -34,12 +31,16 @@ module Startwatch =
 
                 let secsText =
                     match (hours, mins, secs) with
-                    | 0, 0, s when s > 0 -> sprintf "%s\\.%ff" (t.ToString("s")) (t.TotalSeconds % 1.0)
+                    | 0, 0, s when s > 0 -> sprintf "%ss" (t.ToString("s\\.ff"))
                     | h, _, s when h > 0 && s > 0 -> sprintf "%ss" (t.ToString("ss"))
                     | _, m, s when m > 0 && s > 0 -> sprintf "%ss" (t.ToString("ss"))
-                    | _, _, s when s > 0 -> sprintf "%ss" (t.ToString("s"))
+                    | _, _, s when s > 0 -> sprintf "%s" (t.ToString("s"))
                     | _ -> String.Empty
 
                 $"{prependText}{hoursText}{minsText}{secsText}"
 
-        member this.ElapsedFriendly = elapsedFriendly startedAt
+module Startwatch =
+    type Watch() =
+        let startedAt = Stopwatch.GetTimestamp()
+
+        member this.ElapsedFriendly = Stopwatch.GetElapsedTime(startedAt)
