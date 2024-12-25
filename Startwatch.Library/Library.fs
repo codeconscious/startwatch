@@ -7,6 +7,8 @@ module Extensions =
     type TimeSpan with
         member this.ElapsedFriendly() =
             match this with
+            | t when t.Ticks < 0 -> raise <| NotSupportedException("Negative TimeSpans are currently not supported.")
+            | t when t.Ticks = 0 -> "no time"
             | t when t.TotalMilliseconds < 1 -> sprintf "%s" (t.TotalNanoseconds.ToString("#,##0ns"))
             | t when t.TotalMilliseconds < 1000 -> sprintf "%s" (t.TotalMilliseconds.ToString("#,##0ms"))
             | t ->
@@ -17,19 +19,19 @@ module Extensions =
 
                 let prependText = if secs = 0 then "exactly " else String.Empty
 
-                let hoursText =
+                let hourText =
                     match (days, hours) with
                     | d, _ when d > 0 -> sprintf "%s" ((hours + (days * 24)).ToString("#,##0h"))
                     | _, h when h > 0 -> sprintf "%s" ((hours + (days * 24)).ToString("#,##0h"))
                     | _ -> String.Empty
 
-                let minsText =
+                let minText =
                     match (hours, mins) with
                     | h, m when h > 0 && m > 0 -> sprintf "%s" (m.ToString("00m"))
                     | _, m when m > 0 -> sprintf "%s" (m.ToString("0m"))
                     | _ -> String.Empty
 
-                let secsText =
+                let secText =
                     match (days, hours, mins, secs) with
                     | d, _, 0, s when d > 0 && s > 0 -> sprintf "%ss" (t.ToString("ss"))
                     | _, 0, 0, s when s > 0 -> sprintf "%ss" (t.ToString("s\\.ff"))
@@ -38,10 +40,10 @@ module Extensions =
                     | _, _, _, s when s > 0 -> sprintf "%s" (t.ToString("s"))
                     | _ -> String.Empty
 
-                $"{prependText}{hoursText}{minsText}{secsText}"
+                $"{prependText}{hourText}{minText}{secText}"
 
 module Startwatch =
     type Watch() =
         let startedAt = Stopwatch.GetTimestamp()
 
-        member this.ElapsedFriendly = Stopwatch.GetElapsedTime(startedAt)
+        member _.ElapsedFriendly = Stopwatch.GetElapsedTime(startedAt)

@@ -5,6 +5,18 @@ open Xunit
 open Startwatch.Library.Extensions
 
 [<Fact>]
+let ``Throws for negative TimeSpans`` () =
+    let timeSpan = TimeSpan.FromTicks(-7)
+    Assert.Throws<NotSupportedException>(fun _ -> timeSpan.ElapsedFriendly() :> obj)
+
+[<Fact>]
+let ``Zero timespan`` () =
+    let timeSpan = TimeSpan.Zero // 1 tick == 100 nanoseconds
+    let actual = timeSpan.ElapsedFriendly()
+    let expected = "no time"
+    Assert.Equal(expected, actual)
+
+[<Fact>]
 let ``Nanoseconds with 3 digits`` () =
     let timeSpan = TimeSpan.FromTicks(1) // 1 tick == 100 nanoseconds
     let actual = timeSpan.ElapsedFriendly()
