@@ -42,8 +42,10 @@ module Extensions =
 
                 $"{prependText}{hourText}{minText}{secText}"
 
-module Startwatch =
-    type Watch() =
-        let startedAt = Stopwatch.GetTimestamp()
+type Watch() =
+    let mutable startedAt = Stopwatch.GetTimestamp()
 
-        member _.ElapsedFriendly = Stopwatch.GetElapsedTime(startedAt)
+    member _.ElapsedFriendly = Stopwatch.GetElapsedTime(startedAt)
+
+    member _.Restart =
+        startedAt <- Stopwatch.GetTimestamp()
