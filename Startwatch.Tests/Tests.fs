@@ -246,3 +246,10 @@ let ``Triple-digit day with minutes, hours, and seconds`` () =
     let actual = timeSpan.ElapsedFriendly()
     let expected = "2,423h59m59s"
     Assert.Equal(expected, actual)
+
+[<Fact>]
+let ``Maximum TimeSpan`` () =
+    let timeSpan = TimeSpan.MaxValue
+    let actual = timeSpan.ElapsedFriendly()
+    let expected = "256,204,778h48m05s"
+    Assert.Equal(expected, actual)
