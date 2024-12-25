@@ -30,11 +30,12 @@ module Extensions =
                     | _ -> String.Empty
 
                 let secsText =
-                    match (hours, mins, secs) with
-                    | 0, 0, s when s > 0 -> sprintf "%ss" (t.ToString("s\\.ff"))
-                    | h, _, s when h > 0 && s > 0 -> sprintf "%ss" (t.ToString("ss"))
-                    | _, m, s when m > 0 && s > 0 -> sprintf "%ss" (t.ToString("ss"))
-                    | _, _, s when s > 0 -> sprintf "%s" (t.ToString("s"))
+                    match (days, hours, mins, secs) with
+                    | d, _, 0, s when d > 0 && s > 0 -> sprintf "%ss" (t.ToString("ss"))
+                    | _, 0, 0, s when s > 0 -> sprintf "%ss" (t.ToString("s\\.ff"))
+                    | _, h, _, s when h > 0 && s > 0 -> sprintf "%ss" (t.ToString("ss"))
+                    | _, _, m, s when m > 0 && s > 0 -> sprintf "%ss" (t.ToString("ss"))
+                    | _, _, _, s when s > 0 -> sprintf "%s" (t.ToString("s"))
                     | _ -> String.Empty
 
                 $"{prependText}{hoursText}{minsText}{secsText}"
