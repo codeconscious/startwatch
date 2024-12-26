@@ -6,10 +6,18 @@ open System.Diagnostics
 module Logic =
     let format (timespan: TimeSpan) =
         match timespan with
-        | t when t.Ticks < 0 -> raise <| NotSupportedException("Negative TimeSpans are currently not supported.")
-        | t when t.Ticks = 0 -> "no time"
-        | t when t.TotalMilliseconds < 1 -> sprintf "%s" (t.TotalNanoseconds.ToString("#,##0ns"))
-        | t when t.TotalMilliseconds < 1000 -> sprintf "%s" (t.TotalMilliseconds.ToString("#,##0ms"))
+        | t when t.Ticks < 0 ->
+            raise <| NotSupportedException("Negative TimeSpans are currently not supported.")
+        | t when t.Ticks = 0 ->
+            "no time"
+        | t when t.TotalMilliseconds < 0.01 ->
+            sprintf "%s (%s)"
+                (t.TotalMilliseconds.ToString("#,##0.#####ms"))
+                (t.TotalNanoseconds.ToString("#,##0ns"))
+        | t when t.TotalMilliseconds < 1 ->
+            sprintf "%s" (t.TotalMilliseconds.ToString("#,##0.#####ms"))
+        | t when t.TotalMilliseconds < 1000 ->
+            sprintf "%s" (t.TotalMilliseconds.ToString("#,##0ms"))
         | t ->
             let days = t.Days
             let hours = t.Hours
@@ -43,11 +51,15 @@ module Logic =
 
 open Logic
 
+/// A simple wrapper for `System.Diagnostic.Stopwatch` class saves its start time
+/// and provides friendly representations of the elapsed time.
 type Watch() =
     let mutable startedAt = Stopwatch.GetTimestamp()
 
+    /// Returns a formatted "friendly" version of the elapsed time.
     member _.ElapsedFriendly =
         format <| Stopwatch.GetElapsedTime(startedAt)
 
+    /// Sets the start time for this instance to the current time.
     member _.Restart =
         startedAt <- Stopwatch.GetTimestamp()

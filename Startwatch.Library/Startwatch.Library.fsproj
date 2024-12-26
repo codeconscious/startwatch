@@ -4,7 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageId>CodeConscious.Startwatch</PackageId>
-        <Version>0.0.7-beta</Version>
+        <Version>0.0.7-rc</Version>
         <Authors>CodeConscious</Authors>
         <Company>CodeConscious</Company>
         <Description>A simple wrapper for System.Diagnostics.Stopwatch.</Description>
@@ -13,6 +13,7 @@
         <PackageReadmeFile>readme.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <RootNamespace>Startwatch.Library</RootNamespace>
     </PropertyGroup>
 

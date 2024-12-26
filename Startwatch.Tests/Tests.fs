@@ -6,33 +6,54 @@ open Startwatch.Library.Logic
 
 [<Fact>]
 let ``Throws for negative TimeSpans`` () =
-    let timeSpan = TimeSpan.FromTicks(-7)
+    let timeSpan = TimeSpan.FromTicks(-8001)
     Assert.Throws<NotSupportedException>(fun _ -> format timeSpan :> obj)
 
 [<Fact>]
 let ``Zero timespans`` () =
-    let timeSpan = TimeSpan.Zero // 1 tick == 100 nanoseconds
+    let timeSpan = TimeSpan.Zero
     let actual = format timeSpan
     let expected = "no time"
     Assert.Equal(expected, actual)
 
 [<Fact>]
-let ``Three-digit nanoseconds`` () =
-    let timeSpan = TimeSpan.FromTicks(1) // 1 tick == 100 nanoseconds
+let ``Millisecond ten-thousandths (with nanoseconds)`` () =
+    let timeSpan = TimeSpan.FromMilliseconds(0.0001)
     let actual = format timeSpan
-    let expected = "100ns"
+    let expected = "0.0001ms (100ns)"
     Assert.Equal(expected, actual)
 
 [<Fact>]
-let ``Five-digit nanoseconds`` () =
-    let timeSpan = TimeSpan.FromTicks(100L) // 1 tick == 100 nanoseconds
+let ``Millisecond thousandths (with nanoseconds)`` () =
+    let timeSpan = TimeSpan.FromMilliseconds(0.001)
     let actual = format timeSpan
-    let expected = "10,000ns"
+    let expected = "0.001ms (1,000ns)"
     Assert.Equal(expected, actual)
 
 [<Fact>]
-let ``Single-digit milliseconds`` () =
-    let timeSpan = TimeSpan.FromMilliseconds(1.0)
+let ``Millisecond hundredths`` () =
+    let timeSpan = TimeSpan.FromMilliseconds(0.01)
+    let actual = format timeSpan
+    let expected = "0.01ms"
+    Assert.Equal(expected, actual)
+
+[<Fact>]
+let ``Millisecond tenths`` () =
+    let timeSpan = TimeSpan.FromMilliseconds(0.1)
+    let actual = format timeSpan
+    let expected = "0.1ms"
+    Assert.Equal(expected, actual)
+
+[<Fact>]
+let ``Milliseconds with 4 decimals`` () =
+    let timeSpan = TimeSpan.FromMilliseconds(0.9598)
+    let actual = format timeSpan
+    let expected = "0.9598ms"
+    Assert.Equal(expected, actual)
+
+[<Fact>]
+let ``One millisecond`` () =
+    let timeSpan = TimeSpan.FromMilliseconds(1)
     let actual = format timeSpan
     let expected = "1ms"
     Assert.Equal(expected, actual)
