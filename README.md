@@ -1,5 +1,7 @@
 # Startwatch
 
-This is a very simple wrapper around `System.Diagnostics.Stopwatch`. Since its stopwatch starts automatically, its name is "Startwatch." ^_^
+This is a very simple wrapper around the `System.Diagnostics.Stopwatch` class that just shows "friendly" versions of elapsed times via its `GetElapsedTime` property.
 
-I largely created this to get some experience uploading a package to Nuget.org, but also to use in some of my personal projects. Note that the API of this library could change significantly at any moment.
+Since it starts tracking time at class instantiation, its name is "Startwatch." ^_^
+
+I largely created this to get some experience uploading packages to Nuget.org, but I also use it in some of my personal projects.
