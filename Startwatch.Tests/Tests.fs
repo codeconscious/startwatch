@@ -23,6 +23,14 @@ let ``Millisecond ten-thousandths (with nanoseconds)`` () =
     let expected = "0.0001ms (100ns)"
     Assert.Equal(expected, actual)
 
+
+[<Fact>]
+let ``Milliseconds with 4 decimals`` () =
+    let timeSpan = TimeSpan.FromMilliseconds(0.9598)
+    let actual = format timeSpan
+    let expected = "0.9598ms"
+    Assert.Equal(expected, actual)
+
 [<Fact>]
 let ``Millisecond thousandths (with nanoseconds)`` () =
     let timeSpan = TimeSpan.FromMilliseconds(0.001)
@@ -42,13 +50,6 @@ let ``Millisecond tenths`` () =
     let timeSpan = TimeSpan.FromMilliseconds(0.1)
     let actual = format timeSpan
     let expected = "0.1ms"
-    Assert.Equal(expected, actual)
-
-[<Fact>]
-let ``Milliseconds with 4 decimals`` () =
-    let timeSpan = TimeSpan.FromMilliseconds(0.9598)
-    let actual = format timeSpan
-    let expected = "0.9598ms"
     Assert.Equal(expected, actual)
 
 [<Fact>]
